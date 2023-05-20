@@ -4,7 +4,6 @@ import { nanoid } from "nanoid"
 import { TodoContext } from '../Context'
 
 const TodoForm = () => {
-    const {list} = useContext(TodoContext)
     const {setList} = useContext(TodoContext)
 
     const [value, setValue] = useState({

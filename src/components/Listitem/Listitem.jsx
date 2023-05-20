@@ -4,7 +4,6 @@ import { BiEdit } from "react-icons/bi"
 import { BsTrash } from "react-icons/bs"
 import { SiVerizon } from "react-icons/si"
 import { TodoContext } from '../Context'
-import { nanoid } from 'nanoid'
 
 
 function Listitem({ text, id }) {
