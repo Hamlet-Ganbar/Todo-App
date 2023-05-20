@@ -1,23 +1,35 @@
+li{
+   list-style-position: inside;
+   margin-left: 10px;
+
+}
+.checkbox{
+   accent-color: green;
+}
 .listitem {
    background-color: transparent;
    border: 0;
    outline: 0;
    color: #fff;
-   padding: 10px;
+   padding: 10px 10px 10px 0;
    border-bottom: 1px solid rgb(0, 242, 255);
-   font-size: 20px;
+   font-size: 18px;
+   cursor: pointer;
+   width: 60%;
+   text-align: start;
+   margin-left: 10px;
+   margin-top: 15px;
 }
 
 .edit,
 .delete {
-   padding: 10px 20px;
-   margin-left: 10px;
+   padding: 5px;
    background-color: transparent;
-   font-size: 25px;
+   font-size: 20px;
    color: #fff;
    border: 0;
    margin-top: 5px;
-   border-radius: 15px;
+   border-radius: 10px;
 }
 
 .edit:active,
@@ -27,7 +39,21 @@
 .editing{
    border: 1px solid #fff;
 }
-
 .readyItem{
    text-decoration: line-through;
+}
+
+@media screen and (max-width:440px){
+   ol{
+      padding: 0;
+   }
+   .listitem{
+      margin-left: 5px;
+      width: 40%;
+   }
+}
+@media screen and (max-width:300px){
+   .listitem{
+      width: 35%;
+   }
 }

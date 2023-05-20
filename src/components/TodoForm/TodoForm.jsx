@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import "./TodoForm.css"
 import { nanoid } from "nanoid"
+import { TodoContext } from '../Context'
 
-const TodoForm = ({ list, setList }) => {
+const TodoForm = () => {
+    const {list} = useContext(TodoContext)
+    const {setList} = useContext(TodoContext)
 
     const [value, setValue] = useState({
         text: "",
@@ -14,10 +17,12 @@ const TodoForm = ({ list, setList }) => {
     }
 
     const submitHandler = (e) => {
-        e.preventDefault()
-        
+        e.preventDefault()    
         if(value.text){
-            setList([...list, { ...value, id: nanoid() }])
+            let a = JSON.parse(localStorage.getItem('mylist'))
+            a.push({ ...value, id: nanoid() })
+            setList(a)
+            localStorage.setItem('mylist', JSON.stringify(a))
             setValue({
                 text: "",
                 id: ""
@@ -26,7 +31,6 @@ const TodoForm = ({ list, setList }) => {
     }
 
     return (
-
         <div className='form-div'>
             <form onSubmit={submitHandler}>                
                 <input
@@ -38,9 +42,6 @@ const TodoForm = ({ list, setList }) => {
                 />
                 <button className='form-button' type='submit'> ADD </button>
             </form>
-
-
-
         </div>
     )
 }

@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import ListItem from '../Listitem/Listitem'
 import "./TodoList.css"
+import { TodoContext } from '../Context'
 
-const TodoList = ({ list, setList }) => {
+const TodoList = () => {
+    const {list} = useContext(TodoContext)
     return (
-
-        <ol>
+        <ol className='ordered'>
             {
-                list.map((item) => <ListItem key={item.id} {...item} list={list} setList={setList} />)
+                list.map((item) => <ListItem key={item.id} {...item} />)
             }
         </ol>
 

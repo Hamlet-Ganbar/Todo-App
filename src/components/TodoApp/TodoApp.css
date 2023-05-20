@@ -1,8 +1,6 @@
 .body{
-    width: 70vh;
+    min-width: 40vw;
     min-height: 80vh;
-    /* background-color: rgba(6, 6, 62, 0.795); */
-    /* background-color: darkslategray; */
     background-image: url(../Img/00.jpg);
     border-radius: 30px;
     padding: 20px;

@@ -1,47 +1,62 @@
-import React, { useRef, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import "../Listitem/Listitem.css"
 import { BiEdit } from "react-icons/bi"
 import { BsTrash } from "react-icons/bs"
+import { SiVerizon } from "react-icons/si"
+import { TodoContext } from '../Context'
+import { nanoid } from 'nanoid'
 
 
-function Listitem({ text, id, list, setList }) {
+function Listitem({ text, id }) {
 
   const [edit, setEdit] = useState(true)
-
   const [itemValue, setItemValue] = useState(text)
+  const [check, setCheck] = useState(false)
 
   const deleteHandler = (key) => {
-    const filteredList = list.filter(item => item.id !== key)
+    let a = JSON.parse(localStorage.getItem('mylist'))
+    const filteredList = a.filter(item => item.id !== key)
     setList(filteredList)
+    localStorage.setItem('mylist', JSON.stringify(filteredList))
   }
 
-  
+
+
   const editHandler = () => {
-    setEdit(!edit)
+    setEdit(false)
   }
-  
-  const itemRef = useRef()
-  const ready = () => {
-    itemRef.current.classList.toggle("readyItem")
+  const editedHandler = (key) => {
+    setEdit(true)
+    let storageList = JSON.parse(localStorage.getItem('mylist'))
+
+    let finded = storageList.find(item => item.id === key)
+    finded.text = itemValue
+    localStorage.setItem('mylist', JSON.stringify(storageList))
   }
 
-  
+  const ready = () => {
+    setCheck(!check)
+  }
+
+  const { setList } = useContext(TodoContext)
   return (
-    <li  >
+    <li>
+      <input className='checkbox' onChange={ready} type='checkbox' checked={check} />
       <input
-        ref={itemRef}
         onDoubleClick={ready}
         value={itemValue}
-        onChange={(e) => {setItemValue(e.target.value) }}
+        onChange={(e) => { setItemValue(e.target.value) }}
         type="text"
         readOnly={edit}
-        className='listitem'
+        className={check ? 'listitem readyItem' : 'listitem'}
       />
 
-      <button onClick={editHandler} className={edit? 'edit': 'edit editing'}><BiEdit /></button>
+      {edit ? <button onClick={() => editHandler(id)} className={edit ? 'edit' : 'edit editing'}><BiEdit /></button> :
+        <button onClick={() => editedHandler(id)} className={edit ? 'edit' : 'edit editing'}><SiVerizon /></button>
+      }
 
       <button onClick={() => deleteHandler(id)} className='delete'><BsTrash /></button>
-      
+
     </li>
   )
 }
